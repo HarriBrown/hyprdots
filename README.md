@@ -21,7 +21,7 @@
 🔍 Rofi
 </summary></p>
 
-![image](https://raw.githubusercontent.com/BinaryHarbinger/hyprdots/main/preview/rofi.png)
+![image](https://raw.githubusercontent.com/BinaryHarbinger/hyprdots/main/preview/rofi.GIF)
 
 <p></details>
 
@@ -29,7 +29,7 @@
 ⚙️ Rofi Menu
 </summary></p>
 
-![image](https://raw.githubusercontent.com/BinaryHarbinger/hyprdots/main/preview/rofiMenu.png)
+![image](https://raw.githubusercontent.com/BinaryHarbinger/hyprdots/main/preview/rofiMenu.GIF)
 
 <p></details>
 
@@ -37,7 +37,7 @@
 ⚙️ Action Center
 </summary></p>
 
-![image](https://raw.githubusercontent.com/BinaryHarbinger/hyprdots/main/preview/center.png)
+![image](https://raw.githubusercontent.com/BinaryHarbinger/hyprdots/main/preview/center.GIF)
 
 <p></details>
 
@@ -45,7 +45,7 @@
 🎵 Player
 </summary></p>
 
-![image](https://raw.githubusercontent.com/BinaryHarbinger/hyprdots/main/preview/player.png)
+![image](https://raw.githubusercontent.com/BinaryHarbinger/hyprdots/main/preview/player.GIF)
 
 <p></details>
 
@@ -53,7 +53,7 @@
 🔔 SwayNC
 </summary></p>
 
-![image](https://raw.githubusercontent.com/BinaryHarbinger/hyprdots/main/preview/swaync.png)
+![image](https://raw.githubusercontent.com/BinaryHarbinger/hyprdots/main/preview/swaync.GIF)
 
 <p></details>
 
@@ -61,14 +61,7 @@
 ⌨️ Terminal Applications
 </summary></p>
 
-![image](https://raw.githubusercontent.com/BinaryHarbinger/hyprdots/main/preview/terminal.png)
-
-<p></details>
-<details><summary>
-❗On Screen Display
-</summary></p>
-
-![image](https://raw.githubusercontent.com/BinaryHarbinger/hyprdots/main/preview/osd.png)
+![image](https://raw.githubusercontent.com/BinaryHarbinger/hyprdots/main/preview/terminal.GIF)
 
 <p></details>
 
@@ -76,7 +69,7 @@
 💻 Desktop Widgets
 </summary></p>
 
-![image](https://raw.githubusercontent.com/BinaryHarbinger/hyprdots/main/preview/desktop.png)
+![image](https://raw.githubusercontent.com/BinaryHarbinger/hyprdots/main/preview/desktop.GIF)
 
 <p></details>
 
@@ -84,17 +77,10 @@
 🚪 Session Options
 </summary></p>
 
-![image](https://raw.githubusercontent.com/BinaryHarbinger/hyprdots/main/preview/wlogout.png)
+![image](https://raw.githubusercontent.com/BinaryHarbinger/hyprdots/main/preview/wlogout.GIF)
 
 <p></details>
 
-<details><summary>
-🔒 Lock Screen
-</summary></p>
-
-![image](https://raw.githubusercontent.com/BinaryHarbinger/hyprdots/main/preview/hyprlock.png)
-
-<p></details>
 ----------------------------------------------------------------------------------------
 
 ## How to install?
