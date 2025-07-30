@@ -42,14 +42,6 @@
 <p></details>
 
 <details><summary>
-🎵 Player
-</summary></p>
-
-![image](https://raw.githubusercontent.com/BinaryHarbinger/hyprdots/main/preview/player.GIF)
-
-<p></details>
-
-<details><summary>
 🔔 SwayNC
 </summary></p>
 
