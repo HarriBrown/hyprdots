@@ -24,7 +24,7 @@ yay -Syu --noconfirm --needed >/dev/null 2>&1 || error "System update failed"
 PACKAGES=(
   breeze cliphist git nwg-look qt6ct fish power-profiles-daemon fastfetch ttf-jetbrains-mono-nerd ttf-jetbrains-mono
   ttf-fira-code otf-fira-code-symbol hyprland yazi micro rofi-wayland hyprlock hyprpolkitagent unzip hyprsunset rofimoji
-  hyprpaper wlogout foot papirus-icon-theme base-devel waybar swaync mpv hyprpicker eww pamixer hypridle udiskie
+  hyprpaper wlogout foot papirus-icon-theme base-devel waybar swaync mpv hyprpicker eww pamixer hypridle udiskie wiremix
   network-manager-applet pamixer brightnessctl swww bibata-cursor-theme catppuccin-gtk-theme-mocha ttf-material-design-iconic-font
 )
 

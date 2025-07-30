@@ -183,7 +183,7 @@
     "menu-file": "~/.config/waybar/volume_menu.xml",
 		"menu-actions": {
 		"ToggleSound": "pamixer -t&",
-		"pavu": "nohup pavucontrol >/dev/null 2>&1 &",
+		"pavu": "nohup foot --app-id=Wiremix -e wiremix >/dev/null 2>&1 &",
 		},
   },
   "memory": {
