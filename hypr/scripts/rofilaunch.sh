@@ -259,7 +259,9 @@ theme_menu() {
     cp -r $THEME_PATH/theme.rasi ~/.config/rofi/ 
     cp -r $THEME_PATH/hypr.conf ~/.config/hypr/theme.conf
     cp -r $THEME_PATH/wiremix.toml ~/.config/wiremix/ 
-    cp -r $THEME_PATH/foot.ini ~/.config/foot/ 
+    cp -r $THEME_PATH/foot.ini ~/.config/foot/
+    bash $THEME_PATH/theme.sh
+
     eww r &
     pkill waybar
     waybar

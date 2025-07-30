@@ -17,6 +17,7 @@ case $1 in
             filepath="$2"
         fi
         echo "Wallpaper set to $filepath."
+        ln -sf "$filepath" ~/.config/hypr/wallppr.png
 		swww img "$filepath" --transition-fps 60 --transition-step 255 --transition-type any
 		sleep 1
         echo "Hyprpaper reloaded."
