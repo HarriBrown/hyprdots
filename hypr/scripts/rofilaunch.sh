@@ -103,7 +103,7 @@ widget_settings() {
 
 waybar_settings() {
     # Menu options displayed in rofi
-    options=" Single Bar\n Binary Bar\n Floating Bar\n Reload Bar"
+    options=" Single Bar\n Simple Bar\n Binary Bar\n Floating Bar\n Reload Bar"
 
     # Prompt user to choose an option
     chosen=$(echo -e "$options" | rofi -config ~/.config/rofi/sysmenu.rasi -dmenu -p "Select an option:")
@@ -119,8 +119,12 @@ waybar_settings() {
             cp -r ~/.config/hypr/styles/waybar/defaultConfig ~/.config/waybar/config
             ;;
         " Floating Bar")
-        cp -r ~/.config/hypr/themes/styles/floating.css ~/.config/waybar/style.css
-        cp -r ~/.config/hypr/themes/styles/floatConfig ~/.config/waybar/config
+            cp -r ~/.config/hypr/styles/waybar/floating.css ~/.config/waybar/style.css
+            cp -r ~/.config/hypr/styles/waybar/floatConfig ~/.config/waybar/config
+            ;;
+        " Simple Bar")
+            cp -r ~/.config/hypr/styles/waybar/simple.css ~/.config/waybar/style.css
+            cp -r ~/.config/hypr/styles/waybar/simpleConfig ~/.config/waybar/config
             ;;
         " Reload Bar")
         pkill waybar
@@ -239,7 +243,7 @@ system_menu() {
 }
 
 theme_menu() {
-   THEME_DIR="$HOME/.config/hypr/themes"
+   THEME_DIR="$HOME/.config/themes"
 
     # Menu options displayed in rofi
     THEMES=$(find "$THEME_DIR" -mindepth 1 -maxdepth 1 -type d -printf '%f\n')
@@ -260,6 +264,7 @@ theme_menu() {
     cp -r $THEME_PATH/hypr.conf ~/.config/hypr/theme.conf
     cp -r $THEME_PATH/wiremix.toml ~/.config/wiremix/ 
     cp -r $THEME_PATH/foot.ini ~/.config/foot/
+    cp -r $THEME_PATH/yazi.toml ~/.config/yazi/theme.toml
     bash $THEME_PATH/theme.sh
 
     eww r &

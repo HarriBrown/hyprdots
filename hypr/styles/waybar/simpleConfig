@@ -17,11 +17,9 @@
     "mod": "dock",
     "exclusive": true,
     "gtk-layer-shell": true,
-    "margin-top": 0, "margin-bottom": 0,
-    "passthrough": false,
     "height": 0,
 
-    "modules-left": ["group/customs", "mpris", "group/hardware"],
+    "modules-left": ["group/customs"],
     "modules-center": ["hyprland/workspaces"],
     "modules-right": ["tray", "group/controlCenter", "power-profiles-daemon", "clock", "custom/swaync"],
     
@@ -30,8 +28,8 @@
         "format-en": "ENG",
         "format-tr": "TR"
     },
-// ====================================================
 
+// ====================================================
 
 
 
@@ -61,30 +59,6 @@
 
 
 // =============================================================
-
-
-
-
-
-// ====================== Media ======================
-
-  "mpris": {
-
-    "format": "{status_icon}",
-    
-    "player-icons": {
-        "default": "▶  Playing",
-    },
-    "status-icons": {
-      "paused": "  Paused",
-      "playing": "  Playing",
-      "stopped": " Stopped",
-    },
-
-    "tooltip": false
-},
-
-// ===================================================
 
 
 
@@ -259,22 +233,6 @@
 
 
 
-// ====================== Taskbar ====================== 
-
-"wlr/taskbar": {
-    "format": "{icon} {title:.18}",
-    "icon-size": 18,
-    "spacing": 3,
-    
-    "on-click-middle": "close",
-    "tooltip-format": "{title}",
-    "ignore-list": [],
-    
-    "on-click": "activate"
-},
-
-// ======================================================
-
 // ====================== Utilities ======================
 
 "tray": {
@@ -290,18 +248,6 @@
     
 },
 
-  "memory": {
-    "format": "󰍛 {}%",
-    "format-alt": "󰍛 {used}/{total} GiB",
-    "interval": 5
-  },
-
-  "cpu": {
-    "format": "󰻠 {usage}%",
-    "format-alt": "󰻠 {avg_frequency} GHz",
-    "interval": 5
-  },
-
 // =======================================================
 
 
@@ -309,14 +255,6 @@
 
 
 // ====================== Groups ======================
-
-"group/hardware": {
-		"orientation": "horizontal",
-		"modules": [
-			"memory",
-			"cpu"		
-            ]
-},
 
 "group/customs": {
 	"orientation": "horizontal",
@@ -332,4 +270,7 @@
         "backlight"
 	]
 },
+
+// ====================================================
+
 }
