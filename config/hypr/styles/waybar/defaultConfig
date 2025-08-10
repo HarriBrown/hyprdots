@@ -43,7 +43,7 @@
     "format": " ",
     "tooltip": false,
     
-    "on-click": "~/.config/hypr/scripts/rofilaunch.sh --drun",
+    "on-click": "~/.config/scripts/rofilaunch.sh --drun",
 },
 
   "custom/runner": {
@@ -51,12 +51,12 @@
     "format": " ",
     "tooltip": false,
     
-    "on-click": "~/.config/hypr/scripts/rofilaunch.sh --system_menu"
+    "on-click": "~/.config/scripts/rofilaunch.sh --system_menu"
 },
 
 "custom/os_button": {
     "format": "",
-    "on-click": "~/.config/hypr/scripts/rofilaunch.sh --menu",
+    "on-click": "~/.config/scripts/rofilaunch.sh --menu",
     "tooltip": false
   },
 
