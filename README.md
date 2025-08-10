@@ -89,8 +89,10 @@ makepgk -si
 
 After you installed yay. Run this command:
 ```
-pacman -Sy --needed curl
-curl -sSL https://raw.githubusercontent.com/BinaryHarbinger/hyprdots/refs/heads/main/install.sh | bash
+pacman -Sy --needed curl gum
+curl -sSL https://raw.githubusercontent.com/BinaryHarbinger/hyprdots/refs/heads/main/install.sh -o install.sh
+bash install.sh
+
 
 ```
 _If you get errors during and after installation try to enable multilib repistory from Arch Linux_
