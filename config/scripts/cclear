@@ -1,0 +1,22 @@
+#!/bin/bash
+
+GREEN="\e[32m"
+RED="\e[31m"
+BLUE="\e[34m"
+RESET="\e[0m"
+
+echo -e "${BLUE}Clearing Cache...${RESET}"
+
+yay -Scc --noconfirm >/dev/null 2>&1
+
+find ~/.cache -mindepth 1 -maxdepth 1 \
+  ! -name "spotify" \
+  ! -name "cliphist" \
+  ! -name "rofi-entry-history.txt" \
+  ! -name "yay" \
+  ! -name "Hyprland Polkit Agent" \
+  ! -name "spotube" \
+  ! -name "oss.krtirtho.spotube" \
+  -exec rm -rf {} +
+echo -e "${GREEN}Cache Cleared.${RESET}"
+
