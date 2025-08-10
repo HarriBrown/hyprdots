@@ -124,7 +124,6 @@ tooltip label {
 
 #tray menu > *, menu > * {
     color: @fg-main;
-    border-radius: 10px;
     padding: 0px 8px; /* Alt öğeler arasında boşluk */
 }
 

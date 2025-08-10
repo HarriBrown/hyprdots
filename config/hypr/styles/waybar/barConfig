@@ -174,7 +174,7 @@
     "menu-file": "~/.config/waybar/volume_menu.xml",
 	"menu-actions": {
 		"ToggleSound": "pamixer -t&",
-		"pavu": "nohup foot --app-id=Wiremix -e wiremix >/dev/null 2>&1 &",
+		"pavu": "nohup foot --override=colors.alpha=1 --app-id=Wiremix -e wiremix >/dev/null 2>&1 &",
 	},
 },
 
