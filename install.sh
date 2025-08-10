@@ -43,13 +43,15 @@ else
     exit 0
 fi
 
+cd config
+
 info "Updating layout in hyprland.conf..."
 LAYOUT=$(localectl status | grep 'X11 Layout' | awk '{print $3}')
 sed -i "s/kb_layout = tr/kb_layout = ${LAYOUT}/g" ./hypr/hyprland.conf
 
 info "Moving scripts and configs..."
-cp -rf ./.scripts ~
-chmod +x ~/.scripts/*
+cp -rf ./scripts ~/.config/
+chmod +x ~/.config/scripts/*
 
 rm -rf ./preview
 cp -rf ./* ~/.config/
