@@ -110,7 +110,6 @@ listview {
 element {
     padding:          5px 10px ;
     background-color: var(background);
-    vertical-align:   1;
     font:             inherit;
     border-radius:    4px ;
     text-color:       var(foreground);
