@@ -18,4 +18,5 @@
     urgent:         #E06B74FF;
     background:     #11111b;
     foreground:     #b4befe;
+    foreground-alt:     #b4befe;
 }

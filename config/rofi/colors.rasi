@@ -80,7 +80,7 @@ prompt {
     text-font:  inherit;
     padding:     0px 4px 0px 10px;
     border-radius: 10px;
-    text-color: inherit;
+    text-color: var(foreground);
     horizontal-align: 0.30;
     vertical-align: 0.50;
     background-color: var(input-bar-bg);
@@ -112,7 +112,7 @@ element {
     background-color: var(background);
     font:             inherit;
     border-radius:    4px ;
-    text-color:       var(foreground);
+    text-color:       var(foreground-alt);
     spacing:          5px;
 }
 
@@ -121,7 +121,7 @@ element alternate {
     vertical-align:   0.50;
     font:             inherit;
     border-radius:    4px ;
-    text-color:       var(foreground);
+    text-color:       var(foreground-alt);
 
 }
 element selected.normal {
@@ -153,7 +153,7 @@ element alternate.urgent {
 
 element-text {
     background-color: inherit;
-    text-color:       inherit;
+    text-color:       var(foreground-alt);
 }
 
 scrollbar {
