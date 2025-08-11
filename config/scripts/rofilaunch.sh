@@ -206,16 +206,16 @@ set_wallpaper() {
     python ~/.config/hypr/scripts/wallpapers.py changeWallpaper $chosen
 }
 
-system_menu() {
+maintain_menu() {
     # Menu options displayed in rofi
-    options="X Clear Cache\nX Clear Clipboard\n Session Options\n Rice Settings\n Update System"
+    options="Clear Cache\nClear Clipboard\nUpdate Rice\nUpdate System"
 
     # Prompt user to choose an option
     chosen=$(echo -e "$options" | rofi -config ~/.config/rofi/sysmenu.rasi -dmenu -p "Select an option:")
 
     # Execute the corresponding command based on the selected option
     case $chosen in
-        "X Clear Cache")
+        "Clear Cache")
             yay -Scc --no-confirm
          	find ~/.cache -mindepth 1 -maxdepth 1 \
          	  ! -name "spotify" \
@@ -228,7 +228,37 @@ system_menu() {
          	  ! -name "spotube" \
          	  ! -name "oss.krtirtho.spotube" \
          	  -exec rm -rf {} +;;
-        "X Clear Clipboard")
+        "Clear Clipboard")
+            rm -rf ~/.cache/cliphist
+            ;;
+        "Update System")
+            foot --override=colors.alpha=1 --app-id=Update -e bash ~/.config/scripts/update
+            ;;
+        "Update Rice")
+            curl -sSL https://raw.githubusercontent.com/BinaryHarbinger/hyprdots/refs/heads/main/install.sh -o install.sh
+            foot --override=colors.alpha=1 --app-id=Update -e bash ./install.sh
+            rm -rf ./install.sh
+                    ;;
+        *)
+            echo "No option selected"
+            ;;
+    esac
+}
+
+
+system_menu() {
+    # Menu options displayed in rofi
+    options="󰃢 Maintaining\n󰅇 Clear Clipboard\n Session Options\n Rice Settings\n Update System"
+
+    # Prompt user to choose an option
+    chosen=$(echo -e "$options" | rofi -config ~/.config/rofi/sysmenu.rasi -dmenu -p "Select an option:")
+
+    # Execute the corresponding command based on the selected option
+    case $chosen in
+        "󰃢 Maintaining")
+            maintain_menu
+            ;;
+        "󰅇 Clear Clipboard")
             rm -rf ~/.cache/cliphist
             ;;
         " Session Options")
