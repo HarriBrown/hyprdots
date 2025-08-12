@@ -19,4 +19,7 @@
     background:     #101010;
     foreground:     #000000;
     foreground-alt: #FFFFFF;
+    border-radius: 0px;
+    border-radius-win: 0px;
+    border-selected: #D7D7D7;
 }

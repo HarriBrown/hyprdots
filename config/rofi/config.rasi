@@ -5,7 +5,7 @@ entry {
     background-color:            inherit;
     text-color:                  inherit;
     cursor:                      text;
-    placeholder:                 "Type...";
+    placeholder:                 "Search...";
     placeholder-color:           inherit;
 }
 
@@ -78,6 +78,7 @@ sidebar-mode: true;
 /*	imdkit: true;*/
 /*	pid: "/run/user/1000/rofi.pid";*/
 display-window: " ";
+display-Clipboard: " ";
 display-run: " ";
 /*	display-ssh: ;*/
 display-drun: " ";

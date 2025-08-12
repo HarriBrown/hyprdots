@@ -18,5 +18,8 @@
     urgent:         #E06B74FF;
     background:     #11111b;
     foreground:     #b4befe;
-    foreground-alt:     #b4befe;
+    foreground-alt: #b4befe;
+    border-radius: 0px;
+    border-radius-win: 0px;
+    border-selected: var(foreground);  
 }
