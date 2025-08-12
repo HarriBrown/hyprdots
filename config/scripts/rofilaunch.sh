@@ -57,7 +57,7 @@ custom_menu() {
             foot
             ;;
         "")
-            xdg-open https://about:blank
+            bash ~/.config/hypr/scripts/openBrowser.sh
             ;;
         "")
             ~/.config/hypr/scripts/help
@@ -80,14 +80,17 @@ widget_settings() {
         " Desk Clock")
             bash ~/.config/hypr/scripts/widgets.sh three
             bash ~/.config/hypr/scripts/widgets.sh r
+            widget_settings
             ;;
         " Change Stats")
             bash ~/.config/hypr/scripts/widgets.sh one
             bash ~/.config/hypr/scripts/widgets.sh r
+            widget_settings
             ;;
         " Change Music")
             bash ~/.config/hypr/scripts/widgets.sh two
             bash ~/.config/hypr/scripts/widgets.sh r
+            widget_settings
             ;;
         " Reload Widgets")
             bash ~/.config/hypr/scripts/widgets.sh r
@@ -98,7 +101,7 @@ widget_settings() {
         *)
             echo "No option selected"
             ;;
-    esac
+    esac 
 }
 
 waybar_settings() {
