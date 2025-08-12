@@ -1,0 +1,4 @@
+#! /bin/bash
+
+cd ~/.config/scripts/linver-folder/ 
+python linver.py >/dev/null 2>&1
