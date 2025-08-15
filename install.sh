@@ -66,8 +66,8 @@ fi
 # Restart services
 info "Reloading components..."
 
-pgrep waybar && pkill waybar && waybar & disown
-pgrep hyprpaper && pkill hyprpaper & disown
+#pgrep waybar && pkill waybar && waybar & disown
+#pgrep hyprpaper && pkill hyprpaper & disown
 
 swww-daemon || error "swww-daemon failed"
 swww img ~/.config/hypr/wallpapers/Lines.png --transition-fps 60 --transition-step 255 --transition-type any
