@@ -37,9 +37,9 @@ window {
     padding:          10px ;
     children:         [ "mainbox" ];
     orientation:      horizontal;
-    width:            500px;
-    location:         center;
-    anchor:           center;
+    width:            var(width-var);
+    location:         var(location-var);
+    anchor:           var(anchor-var);
     y-offset:         0;
     background-color: var(background-color);
     border-radius:    var(border-radius-win);
@@ -103,14 +103,14 @@ listview {
     background-color: var(background);
     dynamic:          true;
     border-color:     var(foreground);
-    lines:            10;
+    lines:            var(lines-var);
     border-radius:    10px ;
     border:           0px ;
 }
 element {
     padding:          5px 10px ;
     background-color: var(background);
-    font:             inherit;
+    font:             var(list-font);
     border-radius:    var(border-radius) ;
     text-color:       var(foreground-alt);
     spacing:          5px;
@@ -153,6 +153,7 @@ element alternate.urgent {
 element-text {
     background-color: inherit;
     text-color:       var(foreground-alt);
+    font: var(list-font);
 }
 
 scrollbar {

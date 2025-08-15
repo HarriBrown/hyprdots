@@ -21,5 +21,10 @@
     foreground-alt: #b4befe;
     border-radius: 0px;
     border-radius-win: 0px;
-    border-selected: var(foreground);  
+    border-selected: var(foreground);
+    location-var:   center;
+    anchor-var:     center;
+    width-var:      500px;
+    list-font:      inherit;
+    lines-var:      10;
 }

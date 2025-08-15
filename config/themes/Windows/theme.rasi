@@ -22,4 +22,9 @@
     border-radius: 0px;
     border-radius-win: 0px;
     border-selected: #D7D7D7;
+    location-var:   southwest;
+    anchor-var:     west;
+    width-var:      670px;
+    list-font:      "Fira Code 22px";
+    lines-var:      13;
 }

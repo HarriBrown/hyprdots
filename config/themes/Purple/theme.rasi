@@ -22,4 +22,9 @@
     border-radius: 4px;
     border-radius-win: 10px;
     border-selected: var(foreground);
+    location-var:   center;
+    anchor-var:     center;
+    width-var:      500px;
+    list-font:      inherit;
+    lines-var:      10;
 }
