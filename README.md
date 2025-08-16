@@ -77,19 +77,11 @@
 
 ## How to install?
 
-You have to install yay before all. Because some of the dependecies is not in offical repistories.
+I highly recommend using [Chaotic AUR](https://aur.chaotic.cx/docs)
 
-To install yay: 
+Run this command to install:
 ```
-sudo pacman -Sy --needed git base-devel
-git clone https://aur.archlinux.org/yay.git
-cd yay
-makepgk -si
-```
-
-After you installed yay. Run this command:
-```
-pacman -Sy --needed curl
+sudo pacman -Sy --needed curl
 curl -sSL https://raw.githubusercontent.com/BinaryHarbinger/hyprdots/refs/heads/main/install.sh | bash
 
 ```
