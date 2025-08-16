@@ -7,13 +7,13 @@
 
 ## Features
 
-» Simple and effective style.
+» Rofi System Menu (SUPER+U)
 
-» Optimized.
+» Optimized and Clear
 
-» Clear.
+» Multiple Themes.
 
-» Auto installable. (On Arch *(based distros)*)
+» Auto Installable. (On Arch *based distros*)
 
 ## *Example Photos*
 
@@ -89,10 +89,8 @@ makepgk -si
 
 After you installed yay. Run this command:
 ```
-pacman -Sy --needed curl gum
-curl -sSL https://raw.githubusercontent.com/BinaryHarbinger/hyprdots/refs/heads/main/install.sh -o install.sh
-bash install.sh
-
+pacman -Sy --needed curl
+curl -sSL https://raw.githubusercontent.com/BinaryHarbinger/hyprdots/refs/heads/main/install.sh | bash
 
 ```
 _If you get errors during and after installation try to enable multilib repistory from Arch Linux_
