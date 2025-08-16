@@ -321,7 +321,7 @@ theme_menu() {
     eww r &
     pkill waybar
     waybar
-    swaync-client --reload-css
+    swaync-client --reload-css | swaync-client --reload-css | swaync-client --reload-css
 
     notify-send -u normal "🎨 Theme Changed" "" -i preferences-desktop-theme
 
