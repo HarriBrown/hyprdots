@@ -65,7 +65,7 @@ if ! check_dep yay; then
     fi
 fi
 
-if ! yay -Syu --noconfirm --needed >/dev/null 2>&1; then
+if ! yay -Syu --noconfirm >/dev/null 2>&1; then
     error "System update failed. Try to update manually."
     exit 1
 fi
@@ -97,15 +97,13 @@ info "Setting up polkit agent..."
 systemctl --user enable --now hyprpolkitagent.service || error "Failed to enable polkit agent"
 
 # Clone dotfiles
-if gum confirm "Clone BinaryHarbinger dotfiles repo?"; then
-    if ! git clone https://github.com/BinaryHarbinger/hyprdots.git; then
-        error "Failed to clone repository."
-        exit 1
-    fi
-    cd hyprdots || { error "Cannot enter dotfiles directory"; exit 1; }
-else
-    exit 0
+info "Cloning Repository..."
+rm -rf ./hyprdots
+if ! git clone https://github.com/BinaryHarbinger/hyprdots.git; then
+    error "Failed to clone repository."
+    exit 1
 fi
+    cd hyprdots || { error "Cannot enter dotfiles directory"; exit 1; }
 
 # Layout update
 LAYOUT=$(localectl status | awk -F': ' '/X11 Layout/{print $2}')
