@@ -82,7 +82,10 @@ I highly recommend using [Chaotic AUR](https://aur.chaotic.cx/docs)
 Run this command to install:
 ```
 sudo pacman -Sy --needed curl
-curl -sSL https://raw.githubusercontent.com/BinaryHarbinger/hyprdots/refs/heads/main/install.sh | bash
+curl -sSL https://raw.githubusercontent.com/BinaryHarbinger/hyprdots/refs/heads/main/install.sh -o install.sh
+chmod +x install.sh
+./install.sh
+
 
 ```
 _If you get errors during and after installation try to enable multilib repistory from Arch Linux_
