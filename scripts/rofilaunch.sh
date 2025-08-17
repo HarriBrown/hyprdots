@@ -318,9 +318,9 @@ theme_menu() {
     cp -r $THEME_PATH/fish/* ~/.config/fish/
     bash $THEME_PATH/theme.sh
 
-    eww r &
-    pkill waybar
-    waybar
+    eww r >/dev/null 2>&1 & disown
+    pkill waybar >/dev/null 2>&1
+    waybar >/dev/null 2>&1 & disown
     swaync-client --reload-css | swaync-client --reload-css | swaync-client --reload-css
 
     notify-send -u normal "🎨 Theme Changed" "" -i preferences-desktop-theme

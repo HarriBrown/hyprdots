@@ -44,6 +44,6 @@ echo -e "${GREEN}░█▀▀░█▀█░█▄█░█▀█░█░░░
 ░█░░░█░█░█░█░█▀▀░█░░░█▀▀░░█░░█▀▀░█░█
 ░▀▀▀░▀▀▀░▀░▀░▀░░░▀▀▀░▀▀▀░░▀░░▀▀▀░▀▀░${RESET}"
 
-echo -e "\nPress any key to close"
+echo -e "\nPress enter key to close"
 
 read -r
