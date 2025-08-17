@@ -46,8 +46,6 @@ gum confirm "Proceed with setup?" || exit 0
 info "Updating system..."
 if ! check_dep yay; then
     
-    error "'yay' is not installed.\n"
-
     if gum confirm "Install yay?"; then
         info "Installing dependecies..."
         sudo pacman -S --needed base-devel git
@@ -55,12 +53,13 @@ if ! check_dep yay; then
         git clone https://aur.archlinux.org/yay.git
         info "Building package..."
         cd yay
-        bash -e "makepgk -si"
+        makepkg -si
         cd ..
         rm -rf yay
         info "Package (yay) installed."
     else
         error "Aborting setup."
+        rm -rf yay 
         exit 1
     fi
 fi
