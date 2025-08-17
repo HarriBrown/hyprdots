@@ -55,7 +55,7 @@ if ! check_dep yay; then
         git clone https://aur.archlinux.org/yay.git
         info "Building package..."
         cd yay
-        makepgk -si
+        bash -e "makepgk -si"
         cd ..
         rm -rf yay
         info "Package (yay) installed."
