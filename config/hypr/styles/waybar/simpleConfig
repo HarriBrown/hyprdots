@@ -19,7 +19,7 @@
     "gtk-layer-shell": true,
     "height": 0,
 
-    "modules-left": ["group/customs"],
+    "modules-left": ["group/customs","mpris"],
     "modules-center": ["hyprland/workspaces"],
     "modules-right": ["tray", "group/controlCenter", "power-profiles-daemon", "clock", "custom/swaync"],
     
@@ -60,6 +60,28 @@
 
 // =============================================================
 
+
+
+
+// ====================== Media ====================== 
+ 
+"mpris": {
+    
+    "format": "{status_icon}",
+    
+    "player-icons": {
+      "default": "▶  Playing"},
+ 
+    "status-icons": {
+      "paused": "  Paused",   
+      "playing": "  Playing",
+      "stopped": " Stopped",
+    },                       
+  
+    "tooltip": false
+},
+ 
+// ===================================================
 
 
 
