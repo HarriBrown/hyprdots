@@ -4,12 +4,12 @@ cd ~
 
 # Usage Information
 usage() {
-    echo "Usage: $0 [--drun | --run | --menu]"
-    echo ""
-    echo "  --drun   : Launches the application launcher (drun)."
-    echo "  --run    : Launches the command runner (run)."
-    echo "  --menu   : Displays a custom menu with multiple options."
-    echo "  --window : Displays a open windows."
+    echo -e "\n Usage:
+      --drun     : Launches the application launcher (drun).\n
+      --run      : Launches the command runner (run). \n
+      --menu     : Displays a custom menu with multiple options. \n
+      --window   : Displays a open windows.\n 
+      --sys_menu : Displays system menu. \n"
     exit 1
 }
 
@@ -82,29 +82,31 @@ widget_settings() {
             ;;
         " Desk Clock")
             bash ~/.config/hypr/scripts/widgets.sh three
-            bash ~/.config/hypr/scripts/widgets.sh r
+            bash ~/.config/hypr/scripts/widgets.sh r >/dev/null 2>&1 & disown
             widget_settings
             ;;
         " Change Stats")
             bash ~/.config/hypr/scripts/widgets.sh one
-            bash ~/.config/hypr/scripts/widgets.sh r
+            bash ~/.config/hypr/scripts/widgets.sh r >/dev/null 2>&1 & disown
             widget_settings
             ;;
         " Change Music")
             bash ~/.config/hypr/scripts/widgets.sh two
-            bash ~/.config/hypr/scripts/widgets.sh r
+            bash ~/.config/hypr/scripts/widgets.sh r >/dev/null 2>&1 & disown
             widget_settings
             ;;
         " Reload Widgets")
-            bash ~/.config/hypr/scripts/widgets.sh r
+            bash ~/.config/hypr/scripts/widgets.sh r >/dev/null 2>&1 & disown
+            widget_settings
             ;;
         " Initalize Widgets")
-            bash ~/.config/hypr/scripts/widgets.sh r
+            bash ~/.config/hypr/scripts/widgets.sh r >/dev/null 2>&1 & disown
+            widget_settings
             ;;
         *)
             echo "No option selected"
             ;;
-    esac 
+    esac
 }
 
 waybar_settings() {
@@ -117,23 +119,23 @@ waybar_settings() {
     # Execute the corresponding command based on the selected option
     case $chosen in
         " Single Bar")
-            cp -r ~/.config/hypr/styles/waybar/bar.css ~/.config/waybar/style.css
+            cp -r ~/.config/hypr/styles/waybar/bar.css ~/.config/waybar/style.css >/dev/null 2>&1 & disown
             cp -r ~/.config/hypr/styles/waybar/barConfig ~/.config/waybar/config
             ;;
         " Binary Bar")
-            cp -r ~/.config/hypr/styles/waybar/default.css ~/.config/waybar/style.css
+            cp -r ~/.config/hypr/styles/waybar/default.css ~/.config/waybar/style.css >/dev/null 2>&1 & disown
             cp -r ~/.config/hypr/styles/waybar/defaultConfig ~/.config/waybar/config
             ;;
         " Floating Bar")
-            cp -r ~/.config/hypr/styles/waybar/floating.css ~/.config/waybar/style.css
+            cp -r ~/.config/hypr/styles/waybar/floating.css ~/.config/waybar/style.css >/dev/null 2>&1 & disown
             cp -r ~/.config/hypr/styles/waybar/floatConfig ~/.config/waybar/config
             ;;
         " Simple Bar")
-            cp -r ~/.config/hypr/styles/waybar/simple.css ~/.config/waybar/style.css
+            cp -r ~/.config/hypr/styles/waybar/simple.css ~/.config/waybar/style.css >/dev/null 2>&1 & disown
             cp -r ~/.config/hypr/styles/waybar/simpleConfig ~/.config/waybar/config
             ;;
         " Windows")
-            cp -r ~/.config/hypr/styles/waybar/windows.css ~/.config/waybar/style.css
+            cp -r ~/.config/hypr/styles/waybar/windows.css ~/.config/waybar/style.css >/dev/null 2>&1 & disown
             cp -r ~/.config/hypr/styles/waybar/windowsConfig ~/.config/waybar/config
             ;;
         " Reload Bar")
@@ -229,7 +231,6 @@ maintain_menu() {
             ;;
 
         "Clear Cache")
-            yay -Scc --no-confirm
          	find ~/.cache -mindepth 1 -maxdepth 1 \
          	  ! -name "spotify" \
          	  ! -name "cliphist" \
@@ -240,11 +241,11 @@ maintain_menu() {
          	  ! -name "Hyprland Polkit Agent" \
          	  ! -name "spotube" \
          	  ! -name "oss.krtirtho.spotube" \
-         	  -exec rm -rf {} +
+         	  -exec rm -rf {} + >/dev/null 2>&1 & disown
             maintain_menu
             ;;
         "Clear Clipboard")
-            rm -rf ~/.cache/cliphist
+            rm -rf ~/.cache/cliphist >/dev/null 2>&1 & disown
             maintain_menu
             ;;
         "Update System")
@@ -264,7 +265,7 @@ maintain_menu() {
 
 system_menu() {
     # Menu options displayed in rofi
-    options="󰃢 Maintaining\n󰅇 Clear Clipboard\n Session Options\n Rice Settings\n Update System"
+    options="󰃢 Maintaining\n󰅇 Clipboard\n Session Options\n Rice Settings\n Update System"
 
     # Prompt user to choose an option
     chosen=$(echo -e "$options" | rofi -config ~/.config/rofi/sysmenu.rasi -dmenu -p "Select an option:")
@@ -274,8 +275,8 @@ system_menu() {
         "󰃢 Maintaining")
             maintain_menu
             ;;
-        "󰅇 Clear Clipboard")
-            rm -rf ~/.cache/cliphist
+        "󰅇 Clipboard")
+            rofi -modi Clipboard:~/.config/hypr/scripts/clipboard.sh -show Clipboard -show-icons
             ;;
         " Session Options")
             wlogout
@@ -360,6 +361,9 @@ case "$1" in
      --system_menu)
      	system_menu
      	;;
+     --sys_menu)
+        system_menu 
+        ;;
     *)
         usage
         ;;
