@@ -29,6 +29,9 @@
     alternate-urgent-foreground: var(background);
     alternate-active-background: var(active);
     alternate-active-foreground: var(background);
+    lightblue:                   #2b5b7f;
+    active:                      #557f36;
+    urgent:                      #a54850;
 }
 
 window {
