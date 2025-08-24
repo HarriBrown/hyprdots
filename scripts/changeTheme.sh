@@ -23,6 +23,7 @@ change_theme () {
     cp -r "$THEME_PATH/foot.ini" ~/.config/foot/
     cp -r "$THEME_PATH/theme.toml" ~/.config/yazi/theme.toml
     cp -r "$THEME_PATH/fish/"* ~/.config/fish/
+    cp -r "$THEME_PATH/mpv/"* ~/.config/mpv/
     bash "$THEME_PATH/theme.sh"
 
     eww reload >/dev/null 2>&1 & disown
