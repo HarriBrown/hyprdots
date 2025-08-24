@@ -1,0 +1,3 @@
+#!/bin/bash
+
+ncdu / --exclude /media --exclude /run/timeshift
