@@ -9,6 +9,7 @@ BLUE=$(tput setaf 4)
 RESET=$(tput sgr0)
 
 info() { echo -e "${GREEN}➤ $1${RESET}"; }
+procces() { echo -e "${BLUE} $1${RESET}"; }
 error() { echo -e "${RED}✖ $1${RESET}" >&2; }
 
 echo -e "${BLUE}
@@ -42,15 +43,18 @@ fi
 echo -e "   Binary Harbinger's Hyprland dotfiles\n\n"
 gum confirm "Proceed with setup?" || exit 0
 
+# Get sudo password
+echo "Enter your sudo password:"
+sudo echo
+info "Succses"
+
 # Update system
-info "Updating system..."
 if ! check_dep yay; then
     
     if gum confirm "Install yay?"; then
         info "Installing dependecies..."
         sudo pacman -S --needed base-devel git
-        info "Cloning yay.git..."
-        git clone https://aur.archlinux.org/yay.git
+        gum spin --spinner dot --title "Cloning yay repository..." -- git clone https://aur.archlinux.org/yay.git
         info "Building package..."
         cd yay
         makepkg -si
@@ -64,8 +68,15 @@ if ! check_dep yay; then
     fi
 fi
 
-if ! yay -Syu --noconfirm >/dev/null 2>&1; then
-    error "System update failed. Try to update manually."
+if gum spin --spinner dot --title "Updating system..." -- bash -c '
+    if ! yay -Syu --noconfirm --repo >/dev/null 2>&1; then
+        echo "System update failed. Try to update manually." >&2
+        exit 1
+    fi
+'; then
+    gum style --foreground "#49A22C" -- <<< "➤ System updated."
+else
+    gum style --foreground "#FF5555" -- <<< "✖ System update failed. Try manually."
     exit 1
 fi
 
@@ -96,22 +107,13 @@ info "Setting up polkit agent..."
 systemctl --user enable --now hyprpolkitagent.service || error "Failed to enable polkit agent"
 
 # Clone dotfiles
-info "Cloning Repository..."
 rm -rf ./hyprdots
-if ! git clone https://github.com/BinaryHarbinger/hyprdots.git; then
+if ! gum spin --spinner dot --title "Cloning hyprdots repository..." -- git clone https://github.com/BinaryHarbinger/hyprdots.git; then
     error "Failed to clone repository."
     exit 1
 fi
     cd hyprdots || { error "Cannot enter dotfiles directory"; exit 1; }
-
-# Layout update
-LAYOUT=$(localectl status | awk -F': ' '/X11 Layout/{print $2}')
-if [[ -z $LAYOUT ]]; then
-    error "Could not detect keyboard layout."
-else
-    info "Updating layout in hyprland.conf..."
-    sed -i "s/kb_layout = tr/kb_layout = ${LAYOUT}/g" ./config/hypr/hyprland.conf
-fi
+     gum style --foreground "#49A22C" -- <<< "➤ Clonned Repository."
 
 # Move scripts/configs
 info "Moving scripts and configs..."
@@ -126,37 +128,64 @@ rm -rf ./preview
 cp -rf ./config/* ~/.config/ || error "Failed to copy configs"
 chmod +x ~/.config/hypr/scripts/* ~/.config/eww/scripts/* || true
 
+# Layout update
+LAYOUT=$(localectl status | awk -F': ' '/X11 Layout/{print $2}')
+
+if [[ -z $LAYOUT ]]; then
+    error "Could not detect keyboard layout."
+else
+    sed -i "s/kb_layout = tr/kb_layout = ${LAYOUT}/g" ./config/hypr/hyprland.conf
+fi
+
 ln -sf "$HOME/.config/hypr/wallpapers/lines.jpg" "$HOME/.config/hypr/wallppr.png"
 
 # Change shell
-if gum confirm "Change default shell to fish?"; then
-    if chsh -s /bin/fish "$USER"; then
-        info "Default shell changed to fish."
-    else
-        error "Failed to change shell."
+current_shell=$(getent passwd "$USER" | cut -d: -f7)
+
+if [ "$current_shell" != "/usr/bin/fish" ] && [ "$current_shell" != "/bin/fish" ]; then
+    if gum confirm "Change default shell to fish?"; then
+        if chsh -s /bin/fish "$USER"; then
+            info "Default shell changed to fish."
+        else
+            error "Failed to change shell."
+        fi
     fi
 fi
 
-# Restart services
-info "Reloading components..."
+# Post installation
 
-if pgrep waybar >/dev/null 2>&1; then
-    pkill waybar >/dev/null 2>&1 || true
+python ~/.config/hypr/scripts/wallpapers.py changeWallpaper Lines >/dev/null 2>&1 & disown
+
+if pgrep Hyprland >/dev/null; then
+    info "Detected Hyprland session."
+
+   gum spin --spinner dot --title "Reloading Components..." -- bash -c '
+    
+    pkill waybar >/dev/null 2>&1 & disown
+    
+    # swww-daemon restart
+    if pgrep swww-daemon >/dev/null; then
+        pkill swww-daemon
+        sleep 0.5
+    fi 
+
+    # eww restart
+    if pgrep eww >/dev/null; then
+        killall eww
+        eww daemon >/dev/null 2>&1 &
+        disown
+        eww open-many stats desktopmusic >/dev/null 2>&1
+    fi
+    waybar >/dev/null 2>&1 & disown
+    swww-daemon >/dev/null 2>&1 & disown'
+
+    gum style --foreground "#49A22C" -- <<< "➤ Reloaded Components."
 fi
-(waybar & disown) >/dev/null 2>&1 || true
-
-if ! swww-daemon >/dev/null 2>&1 & disown; then
-    error "swww-daemon failed"
-else
-    swww img ~/.config/hypr/wallpapers/Lines.png --transition-fps 60 --transition-step 255 --transition-type any
-fi
-
-sleep 1
-pgrep eww >/dev/null && killall eww && eww daemon  >/dev/null 2>&1 && eww open-many stats desktopmusic  >/dev/null 2>&1
 
 # Cleanup
-info "Cleaning up..."
 cd ..
-rm -rf hyprdots
+gum spin --spinner dot --title "Cleaning up..." -- rm -rf hyprdots
+gum style --foreground "#49A22C" -- <<< "➤ Cleaned."
 
-info "✅ Installation complete! Please restart your session."
+bash $HOME/.config/scripts/changeTheme.sh -p
+echo -e  "${GREEN}✅ Installation complete!"

@@ -8,6 +8,7 @@ USAGE="\nUsage: $0 [OPTION] [ARGUMENT]
 Options:
   -l, --list             List available themes
   -c, --change THEME     Change to specified THEME
+  -p, --prompt           Change theme with interactive prompt
   -h, --help             Show this help message
 "
 change_theme () {
@@ -55,6 +56,12 @@ case $1 in
         fi
 
         change_theme
+        ;;
+
+    --prompt|-p)
+        chosen=$(gum choose --header 'Select a Theme' $THEMES)
+        THEME_PATH="$THEME_DIR/$chosen"
+        change_theme 
         ;;
 
     --help|-h)
