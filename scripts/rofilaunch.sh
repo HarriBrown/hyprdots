@@ -306,25 +306,7 @@ theme_menu() {
         exit 1 
     fi
 
-    THEME_PATH="$THEME_DIR/$chosen"
-    cp -r $THEME_PATH/theme.scss ~/.config/eww/ 
-    cp -r $THEME_PATH/theme.css ~/.config/waybar/
-    cp -r $THEME_PATH/theme.css ~/.config/wlogout/ 
-    cp -r $THEME_PATH/theme.css ~/.config/swaync/ 
-    cp -r $THEME_PATH/theme.rasi ~/.config/rofi/ 
-    cp -r $THEME_PATH/hypr.conf ~/.config/hypr/theme.conf
-    cp -r $THEME_PATH/wiremix.toml ~/.config/wiremix/ 
-    cp -r $THEME_PATH/foot.ini ~/.config/foot/
-    cp -r $THEME_PATH/theme.toml ~/.config/yazi/theme.toml
-    cp -r $THEME_PATH/fish/* ~/.config/fish/
-    bash $THEME_PATH/theme.sh
-
-    eww r >/dev/null 2>&1 & disown
-    pkill waybar >/dev/null 2>&1
-    waybar >/dev/null 2>&1 & disown
-    swaync-client --reload-css | swaync-client --reload-css | swaync-client --reload-css
-
-    notify-send -u normal "🎨 Theme Changed" "" -i preferences-desktop-theme
+   $HOME/.config/scripts/changeTheme.sh -c $chosen 
 
 }
 
@@ -358,12 +340,9 @@ case "$1" in
      --rice_settings)
      	rice_settings
      	;;
-     --system_menu)
+     --system_menu|--sys_menu)
      	system_menu
      	;;
-     --sys_menu)
-        system_menu 
-        ;;
     *)
         usage
         ;;
