@@ -28,9 +28,9 @@ change_theme () {
     eww reload >/dev/null 2>&1 & disown
     pkill waybar >/dev/null 2>&1
     waybar >/dev/null 2>&1 & disown
-    swaync-client --reload-css || swaync-client --reload-css
+    swaync-client --reload-css >/dev/null 2>&1 & disown || swaync-client --reload-css >/dev/null 2>&1 & disown
 
-    notify-send -u normal "🎨 Theme Changed" -i preferences-desktop-theme
+    notify-send -u normal "🎨 Theme Changed" -i preferences-desktop-theme >/dev/null 2>&1 & disown
     echo -e "Theme changed to $chosen"
 }
 
