@@ -18,16 +18,16 @@ case $1 in
         fi
         echo "Wallpaper set to $filepath."
         ln -sf "$filepath" ~/.config/hypr/wallppr.png
-		swww img "$filepath" --transition-fps 60 --transition-step 255 --transition-type wipe
+		swww img "$filepath" --transition-fps 60 --transition-step 255 --transition-type wipe /dev/null 2>&1 & disown
 		sleep 1
-        echo "Hyprpaper reloaded."
+        echo "Wallpaper reloaded."
         ;;
     --reload|-r)
         pkill swww-deamon
 		sleep 2
         swww-deamon > /dev/null 2>&1 & disown
-        eww reload > /dev/null 2>&1
-        echo "Hyprpaper and Eww reloaded."
+        eww reload > /dev/null 2>&1 & disown
+        echo "Wallpaper Reloaded"
         ;;
     *)
         echo "Invalid option: $1"
