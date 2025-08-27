@@ -29,6 +29,8 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Plugin setup using lazy.nvim
 require("lazy").setup({
+
+  -- Telescope
   {
     "nvim-telescope/telescope.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
@@ -37,17 +39,23 @@ require("lazy").setup({
     "nvim-telescope/telescope-file-browser.nvim",
     dependencies = { "nvim-telescope/telescope.nvim" },
   },
+
+  -- Autopairs
   {
     "windwp/nvim-autopairs",
     config = function()
       require("nvim-autopairs").setup{}
     end,
   },
+
+  -- sudo.nvim
   {
     "denialofsandwich/sudo.nvim",
     dependencies = { "MunifTanjim/nui.nvim" },
     config = true,
   },
+
+  -- Treesitter
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
@@ -60,15 +68,15 @@ require("lazy").setup({
     end,
   },
 
-  -- Completion framework and sources
+  -- Completion framework
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-nvim-lsp",
-      "L3MON4D3/LuaSnip",            -- Snippet engine
-      "saadparwaiz1/cmp_luasnip",   -- Snippet completions
+      "L3MON4D3/LuaSnip",
+      "saadparwaiz1/cmp_luasnip",
     },
     config = function()
       local cmp = require("cmp")
@@ -96,46 +104,64 @@ require("lazy").setup({
     end,
   },
 
-  -- Language Server Protocol configurations
+  -- LSP configurations
   {
     "neovim/nvim-lspconfig",
     config = function()
       local lspconfig = require("lspconfig")
-
-      -- C/C++ language server
       lspconfig.clangd.setup{}
-
-      -- Python language server
       lspconfig.pyright.setup{}
-
-      -- Lua language server
       lspconfig.lua_ls.setup{}
-
-      -- JavaScript/TypeScript language server
       lspconfig.ts_ls.setup{}
-
-      -- Bash language server
       lspconfig.bashls.setup{}
-
-      -- Rust language server
       lspconfig.rust_analyzer.setup{}
-
-      -- CSS language server
       lspconfig.cssls.setup{}
-
-      -- YAML language server
       lspconfig.yamlls.setup{}
-
-      -- JSON language server
       lspconfig.jsonls.setup{}
     end,
   },
+
+  -- Dashboard
+  {
+    "nvimdev/dashboard-nvim",
+    event = "VimEnter",
+    config = function()
+      local db = require("dashboard")
+      db.setup({
+        theme = "doom",
+        config = {
+          header = {
+          "","","","","",
+          "░█▀▄░▀█▀░█▀█░█▀█░█▀▄░█░█░░░█▀█░█░█░▀█▀░█▄█",
+          "░█▀▄░░█░░█░█░█▀█░█▀▄░░█░░░░█░█░▀▄▀░░█░░█░█",
+          "░▀▀░░▀▀▀░▀░▀░▀░▀░▀░▀░░▀░░░░▀░▀░░▀░░▀▀▀░▀░▀",
+          "","","","","",
+          },
+          center = {
+            { icon = "  ", desc = "Colorscheme", action = "Telescope colorscheme" },
+            { icon = "  ", desc = "New file", action = "enew" },
+            { icon = "  ", desc = "Find file", action = "Telescope find_files" },
+            { icon = "  ", desc = "File browser", action = "Telescope file_browser" },
+            { icon = "  ", desc = "Quit", action = "qa" },
+          },
+          footer = { "Binaryharbinger's Dotfiles" },
+        },
+        -- Center Menu in X
+        hide_statusline = true,
+        hide_tabline = true,
+        noautocmd = true,
+        center = true,
+      })
+  
+    end,
+  },
+
 })
 
 -- Load telescope file browser extension
 require("telescope").load_extension("file_browser")
 
--- Telescope key mappings for hidden files and project search
+-- Telescope key mappings
 vim.keymap.set("n", "<leader>ff", function()
   require("telescope.builtin").find_files({ hidden = true, no_ignore = true, file_ignore_patterns = { ".git/" } })
 end, { desc = "Find Files (includes hidden)" })
@@ -148,5 +174,5 @@ vim.keymap.set("n", "<leader>fb", function()
   require("telescope").extensions.file_browser.file_browser({ hidden = true })
 end, { desc = "Telescope File Browser (includes hidden)" })
 
--- Load custom colorscheme
+-- Default colorscheme
 vim.cmd("colorscheme binaryharbinger")

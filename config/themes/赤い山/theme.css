@@ -14,7 +14,7 @@
 /*text color for entries, views and content in general */
 @define-color fg-main #FFCACA;
 @define-color fg-unactive @bg-hover;
-@define-color content-act #C42750; /* yeni fg %20 açığı */
+@define-color content-act #C42750;
 
 /* Player colors */
 @define-color ply-main #847a8a;
