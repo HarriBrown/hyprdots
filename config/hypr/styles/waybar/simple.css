@@ -16,7 +16,7 @@
 * {
 	all: unset; /*Remove the useless GTK theme rules*/
     font-family: "JetBrainsMono Nerd Font","Fira Mono";
-    font-weight: 700;
+    font-weight: 900;
     font-size: 12.5px;
 }
 
