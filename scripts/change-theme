@@ -26,7 +26,6 @@ change_theme () {
     cp -r "$THEME_PATH/mpv/"* ~/.config/mpv/
     bash "$THEME_PATH/theme.sh"
 
-    eww reload >/dev/null 2>&1 & disown
     pkill waybar >/dev/null 2>&1
     waybar >/dev/null 2>&1 & disown
     swaync-client --reload-css >/dev/null 2>&1 & disown || swaync-client --reload-css >/dev/null 2>&1 & disown
