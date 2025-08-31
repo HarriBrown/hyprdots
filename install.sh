@@ -80,7 +80,7 @@ if process "Updating system..." bash -c '
 '; then
     info "System updated."
 else
-    error "✖ System update failed. Try manually."
+    error "System update failed. Try manually."
     exit 1
 fi
 
