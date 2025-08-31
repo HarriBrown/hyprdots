@@ -115,6 +115,8 @@ fi
 
 # Clone dotfiles
 
+rm -rf ./hyprdots
+
 REPO_URL="https://github.com/BinaryHarbinger/hyprdots.git"
 PROXY_URL="https://gh-proxy.com/$REPO_URL"
 
