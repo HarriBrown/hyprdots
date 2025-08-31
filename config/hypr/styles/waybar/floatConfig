@@ -44,21 +44,21 @@
     "format": " ",
     "tooltip": false,
     
-    "on-click": "~/.config/scripts/rofilaunch.sh --drun",
+    "on-click": "~/.config/scripts/launchrofi --drun",
 },
 
 "custom/runner": {
     "format": " ",
     "tooltip": false,
     
-    "on-click": "~/.config/scripts/rofilaunch.sh --system_menu",
+    "on-click": "~/.config/scripts/launchrofi --system_menu",
 },
 
 "custom/os_button": {
     "format": " ",
     "tooltip": false,
     
-    "on-click": "~/.config/scripts/rofilaunch.sh --menu",
+    "on-click": "~/.config/scripts/launchrofi --menu",
 },
 
 
