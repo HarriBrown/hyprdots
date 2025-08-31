@@ -4,7 +4,7 @@
 
 /* Background Colors */
 @define-color bg-main #515659;
-@define-color bg-alt #878C8F;
+@define-color bg-alt #696f72;
 @define-color bg-hover #414447;
 @define-color bg-hover-alt #353738;
 @define-color bg-tooltip @bg-main;
