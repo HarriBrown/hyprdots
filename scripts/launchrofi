@@ -184,30 +184,6 @@ rice_settings() {
     esac
 }
 
-wallpaper_settings() {
-    # Menu options displayed in rofi
-    options=" Lines\n Waves\n Patterns"
-
-    # Prompt user to choose an option
-    chosen=$(python ~/.config/hypr/scripts/wallpapers.py | rofi -config ~/.config/rofi/sysmenu.rasi -dmenu -p "Select an option:")
-
-    # Execute the corresponding command based on the selected option
-    case $chosen in
-        " Lines")
-            bash ~/.config/hypr/scripts/wallpaper.sh -s ~/.config/hypr/wallpapers/lines.png
-            ;;
-        " Waves")
-        bash ~/.config/hypr/scripts/wallpaper.sh -s ~/.config/hypr/wallpapers/waves.png
-            ;;
-        " Patterns")
-        bash ~/.config/hypr/scripts/wallpaper.sh -s .config/hypr/wallpapers/bgpatternblue.jpg
-            ;;
-        *)
-            echo "No option selected"
-            ;;
-    esac
-}
-
 set_wallpaper() {
 
     # Prompt user to choose an option
@@ -306,7 +282,7 @@ theme_menu() {
         exit 1 
     fi
 
-   $HOME/.config/scripts/changeTheme.sh -c $chosen 
+   $HOME/.config/scripts/change-theme -c $chosen 
 
 }
 

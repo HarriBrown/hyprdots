@@ -135,6 +135,7 @@ info "Cloned Repository."
 
 # Move scripts/configs
 info "Moving scripts and configs..."
+rm -rf ~/.config/scripts/
 if [[ -d ./scripts ]]; then
     cp -rf ./scripts ~/.config/ || error "Failed to copy scripts"
     chmod +x ~/.config/scripts/* || true
@@ -205,5 +206,5 @@ cd ..
 process "Cleaning up..." rm -rf hyprdots
 info "Cleaned."
 
-bash $HOME/.config/scripts/changeTheme.sh -p
+bash $HOME/.config/scripts/change-theme -p
 echo -e  "${GREEN}✅ Installation complete!"
