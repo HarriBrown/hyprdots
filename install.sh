@@ -114,7 +114,6 @@ else
 fi
 
 # Clone dotfiles
-rm -rf ./hyprdots
 
 REPO_URL="https://github.com/BinaryHarbinger/hyprdots.git"
 PROXY_URL="https://gh-proxy.com/$REPO_URL"
@@ -134,18 +133,23 @@ info "Cloned Repository."
 
 
 # Move scripts/configs
-info "Moving scripts and configs..."
-rm -rf ~/.config/scripts/
-if [[ -d ./scripts ]]; then
-    cp -rf ./scripts ~/.config/ || error "Failed to copy scripts"
-    chmod +x ~/.config/scripts/* || true
-else
-    error "No scripts directory found."
-fi
 
-rm -rf ./preview
-cp -rf ./config/* ~/.config/ || error "Failed to copy configs"
-chmod +x ~/.config/hypr/scripts/* ~/.config/eww/scripts/* || true
+process "Moving scripts and configs..." bash -c '
+    mkdir ~/dots.old
+    mv ~/.config/scripts/ ~/dots.old/ > /dev/null 2>&1
+    mv ~/.config/hypr/ ~/dots.old/ > /dev/null 2>&1
+    mv ~/.config/eww/ ~/dots.old/ > /dev/null 2>&1
+    mv ~/.config/fastfetch/ ~/dots.old/ > /dev/null 2>&1
+    mv ~/.config/nvim/ ~/dots.old/ > /dev/null 2>&1
+    mv ~/.config/rofi/ ~/dots.old/ > /dev/null 2>&1
+    mv ~/.config/waybar/ ~/dots.old/ > /dev/null 2>&1
+    mv ~/.config/foot/ ~/dots.old/ > /dev/null 2>&1
+    cp -rf ./scripts ~/.config/ > /dev/null 2>&1
+    chmod +x ~/.config/scripts/* || true
+    cp -rf ./config/* ~/.config/ > /dev/null 2>&1
+    chmod +x ~/.config/hypr/scripts/* ~/.config/eww/scripts/* || true' 
+
+info 'Moved scripts and config files.'
 
 # Layout update
 LAYOUT=$(localectl status | awk -F': ' '/X11 Layout/{print $2}')
