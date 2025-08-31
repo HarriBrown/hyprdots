@@ -7,13 +7,11 @@
 
 ## Features
 
-» Rofi System Menu (SUPER+U)
-
-» Optimized and Clear
-
-» Multiple Themes.
-
-» Auto Installable. (On Arch *based distros*)
+- Rofi-based system menu (SUPER + U)
+- Multiple themes and preview images
+- EWW/Widget integrations
+- Auto-install script (designed for Arch-based distros)
+- Minimal, opinionated defaults but easy to customize
 
 ## *Example Photos*
 
@@ -75,6 +73,19 @@
 
 ----------------------------------------------------------------------------------------
 
+## Requirements
+
+
+**Recommended base**: Arch Linux or Arch-based distro (EndeavourOS, Manjaro, etc.).
+
+
+**Basic packages** (example for Arch): `hyprland`, `rofi`, `eww`, `alacritty` (veya tercih ettiğin terminal), `git`, `curl`, `swww`/`hyprpaper`, `wayland-protocols`, `wlroots` bağlantılı paketler.
+
+
+**Optional/hardware**:
+- NVIDIA users: proprietary `nvidia-dkms` often required.
+- Ensure `multilib` enabled on Arch if you need 32-bit libs for some apps.
+
 ## How to install?
 
 I highly recommend using [Chaotic AUR](https://aur.chaotic.cx/docs)
@@ -82,19 +93,15 @@ I highly recommend using [Chaotic AUR](https://aur.chaotic.cx/docs)
 Run this command to install:
 ```
 sudo pacman -Sy --needed curl
-curl -sSL https://raw.githubusercontent.com/BinaryHarbinger/hyprdots/refs/heads/main/install.sh -o install.sh
-chmod +x install.sh
-./install.sh
-
+curl -sSL https://raw.githubusercontent.com/BinaryHarbinger/hyprdots/refs/heads/main/install.sh | bash
 
 ```
-_If you get errors during and after installation try to enable multilib repistory from Arch Linux_
 
 # Installing manualy (For non-Arch based distros)
 
 » You have to install all the dependecies from your package manager.
 
-» Copy all the directories (except preview) to your `.config` folder
+» Copy folders inside config and scripts folder itselft to your `~/.config` folder
 
 ***
 

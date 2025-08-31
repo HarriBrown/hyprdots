@@ -2,11 +2,37 @@
 
 set -euo pipefail
 
+
 # Colors
 RED=$(tput setaf 1)
 GREEN=$(tput setaf 2)
 BLUE=$(tput setaf 4)
 RESET=$(tput sgr0)
+
+# --- Get sudo password ---
+echo "Enter your sudo password:"
+sudo echo
+echo -e "${GREEN}➤ Succses. ${RESET}"
+
+# Dependency check
+check_dep() {
+    if ! command -v "$1" >/dev/null 2>&1; then
+        echo -e "${RED}✖'$1' is not installed.${RESET}"
+        return 1
+    fi
+}
+
+
+# Gum check & install
+if ! check_dep gum; then
+    echo -e "${BLUE}Installing gum...${RESET}"
+    if ! sudo pacman -S --noconfirm gum; then
+        echo -e "${RED}✖Failed to install gum. Please install it manually. ${RESET}"
+        exit 1
+    fi
+fi
+
+
 
 info() { gum style --foreground "#49A22C" -- <<< "➤ $1"; }
 process() {
@@ -27,32 +53,10 @@ if [[ $EUID -eq 0 ]]; then
     exit 1
 fi
 
-# Dependency check
-check_dep() {
-    if ! command -v "$1" >/dev/null 2>&1; then
-        error "'$1' is not installed."
-        return 1
-    fi
-}
-
-# Gum check & install
-if ! check_dep gum; then
-    info "Installing gum..."
-    if ! sudo pacman -S --noconfirm gum; then
-        error "Failed to install gum. Please install it manually."
-        exit 1
-    fi
-fi
-
 echo -e "   Binary Harbinger's Hyprland dotfiles\n\n"
 gum confirm "Proceed with setup?" || exit 0
 
-# Get sudo password
-echo "Enter your sudo password:"
-sudo echo
-info "Succses"
-
-# Update system
+# --- Update system ---
 if ! check_dep yay; then
     
     if gum confirm "Install yay?"; then
@@ -84,7 +88,7 @@ else
     exit 1
 fi
 
-# Packages
+# --- Packages ---
 PACKAGES=(
     breeze nwg-look qt6ct papirus-icon-theme bibata-cursor-theme catppuccin-gtk-theme-mocha
     ttf-jetbrains-mono-nerd ttf-jetbrains-mono ttf-fira-code ttf-firacode-nerd otf-fira-code-symbol ttf-material-design-iconic-font
@@ -103,8 +107,19 @@ if ! process "Installing packages..." yay -S --noconfirm --needed "${PACKAGES[@]
     exit 1
 fi
 
+# --- NVIDIA detection & driver installation ---
+if lspci | grep -qi 'NVIDIA'; then
+    info "NVIDIA GPU detected."
+    if ! pacman -Qi nvidia-dkms >/dev/null 2>&1; then
+        process "Installing nvidia-dkms (required for NVIDIA GPUs)..." yay -S --noconfirm --needed nvidia-dkms || error "Failed to install 'nvidia-dkms'. Please install manually" 
+        info "nvidia-dkms installed successfully."
+    else
+        info "nvidia-dkms already installed."
+    fi
+fi
 
-# Polkit agent
+
+# --- Polkit agent ---
 process "Setting up polkit agent..." systemctl --user enable --now hyprpolkitagent.service
 
 if [ $? -eq 0 ]; then
@@ -113,7 +128,7 @@ else
     error "Failed to enable polkit agent."
 fi
 
-# Clone dotfiles
+# --- Clone dotfiles ---
 
 rm -rf ./hyprdots
 
@@ -134,7 +149,7 @@ cd hyprdots || { error "Cannot enter dotfiles directory"; exit 1; }
 info "Cloned Repository."
 
 
-# Move scripts/configs
+# --- Move scripts/configs ---
 
 process "Moving scripts and configs..." bash -c '
     mkdir ~/dots.old
@@ -153,7 +168,7 @@ process "Moving scripts and configs..." bash -c '
 
 info 'Moved scripts and config files.'
 
-# Layout update
+# --- Layout update ---
 LAYOUT=$(localectl status | awk -F': ' '/X11 Layout/{print $2}')
 
 if [[ -z $LAYOUT ]]; then
@@ -177,7 +192,7 @@ if [ "$current_shell" != "/usr/bin/fish" ] && [ "$current_shell" != "/bin/fish" 
     fi
 fi
 
-# Post installation
+# --- Post installation ---
 
 python ~/.config/hypr/scripts/wallpapers.py changeWallpaper Lines >/dev/null 2>&1 & disown
 
@@ -207,7 +222,7 @@ if pgrep Hyprland >/dev/null; then
     info "Reloaded Components."
 fi
 
-# Cleanup
+# --- Cleanup ---
 cd ..
 process "Cleaning up..." rm -rf hyprdots
 info "Cleaned."
