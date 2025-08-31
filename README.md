@@ -78,10 +78,6 @@
 
 **Recommended base**: Arch Linux or Arch-based distro (EndeavourOS, Manjaro, etc.).
 
-
-**Basic packages** (example for Arch): `hyprland`, `rofi`, `eww`, `alacritty` (veya tercih ettiğin terminal), `git`, `curl`, `swww`/`hyprpaper`, `wayland-protocols`, `wlroots` bağlantılı paketler.
-
-
 **Optional/hardware**:
 - NVIDIA users: proprietary `nvidia-dkms` often required.
 - Ensure `multilib` enabled on Arch if you need 32-bit libs for some apps.
