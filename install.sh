@@ -8,9 +8,13 @@ GREEN=$(tput setaf 2)
 BLUE=$(tput setaf 4)
 RESET=$(tput sgr0)
 
-info() { echo -e "${GREEN}➤ $1${RESET}"; }
-procces() { echo -e "${BLUE} $1${RESET}"; }
-error() { echo -e "${RED}✖ $1${RESET}" >&2; }
+info() { gum style --foreground "#49A22C" -- <<< "➤ $1"; }
+process() {
+    local title="$1"
+    shift
+    gum spin --spinner dot --title "$title" -- "$@" 
+}
+error() { gum style --foreground "#FF5555" -- <<< "✖ $1"; }
 
 echo -e "${BLUE}
 ░█▀▄░▀█▀░█▀█░█▀█░█▀▄░█░█░░░█▀▄░█▀█░▀█▀░█▀▀
@@ -54,7 +58,7 @@ if ! check_dep yay; then
     if gum confirm "Install yay?"; then
         info "Installing dependecies..."
         sudo pacman -S --needed base-devel git
-        gum spin --spinner dot --title "Cloning yay repository..." -- git clone https://aur.archlinux.org/yay.git
+        process "Cloning yay repository..." git clone https://aur.archlinux.org/yay.git 
         info "Building package..."
         cd yay
         makepkg -si
@@ -68,15 +72,15 @@ if ! check_dep yay; then
     fi
 fi
 
-if gum spin --spinner dot --title "Updating system..." -- bash -c '
+if process "Updating system..." bash -c '
     if ! yay -Syu --noconfirm --repo >/dev/null 2>&1; then
-        echo "System update failed. Try to update manually." >&2
+        error "System update failed. Try to update manually."
         exit 1
     fi
 '; then
-    gum style --foreground "#49A22C" -- <<< "➤ System updated."
+    info "System updated."
 else
-    gum style --foreground "#FF5555" -- <<< "✖ System update failed. Try manually."
+    error "✖ System update failed. Try manually."
     exit 1
 fi
 
@@ -94,26 +98,40 @@ PACKAGES=(
     rofi-wayland rofimoji
 )
 
-if gum confirm "Install required packages?"; then
-    info "Installing packages..."
-    if ! yay -S --noconfirm --needed "${PACKAGES[@]}"; then
-        error "Package installation failed."
-        exit 1
-    fi
+if ! process "Installing packages..." yay -S --noconfirm --needed "${PACKAGES[@]}"; then
+    error "Package installation failed."
+    exit 1
 fi
 
+
 # Polkit agent
-info "Setting up polkit agent..."
-systemctl --user enable --now hyprpolkitagent.service || error "Failed to enable polkit agent"
+process "Setting up polkit agent..." systemctl --user enable --now hyprpolkitagent.service
+
+if [ $? -eq 0 ]; then
+    info "Polkit agent set up successfully."
+else
+    error "Failed to enable polkit agent."
+fi
 
 # Clone dotfiles
 rm -rf ./hyprdots
-if ! gum spin --spinner dot --title "Cloning hyprdots repository..." -- git clone https://github.com/BinaryHarbinger/hyprdots.git; then
-    error "Failed to clone repository."
-    exit 1
+
+REPO_URL="https://github.com/BinaryHarbinger/hyprdots.git"
+PROXY_URL="https://gh-proxy.com/$REPO_URL"
+
+process "Cloning hyprdots repository..." git clone "$PROXY_URL"
+if [ $? -ne 0 ]; then
+    echo "Proxy failed, trying direct GitHub clone..."
+    process "Cloning hyprdots repository (direct)..." git clone "$REPO_URL" || { 
+        error "Failed to clone repository."
+        exit 1
+    }
 fi
-    cd hyprdots || { error "Cannot enter dotfiles directory"; exit 1; }
-     gum style --foreground "#49A22C" -- <<< "➤ Clonned Repository."
+
+cd hyprdots || { error "Cannot enter dotfiles directory"; exit 1; }
+
+info "Cloned Repository."
+
 
 # Move scripts/configs
 info "Moving scripts and configs..."
@@ -159,7 +177,7 @@ python ~/.config/hypr/scripts/wallpapers.py changeWallpaper Lines >/dev/null 2>&
 if pgrep Hyprland >/dev/null; then
     info "Detected Hyprland session."
 
-   gum spin --spinner dot --title "Reloading Components..." -- bash -c '
+   process "Reloading Components..." bash -c '
     
     pkill waybar >/dev/null 2>&1 & disown
     
@@ -176,16 +194,16 @@ if pgrep Hyprland >/dev/null; then
         disown
         eww open-many stats desktopmusic >/dev/null 2>&1
     fi
-    waybar >/dev/null 2>&1 & disown
-    swww-daemon >/dev/null 2>&1 & disown'
+    nohup waybar >/dev/null 2>&1 & disown
+    setsid swww-daemon >/dev/null 2>&1 &'
 
-    gum style --foreground "#49A22C" -- <<< "➤ Reloaded Components."
+    info "Reloaded Components."
 fi
 
 # Cleanup
 cd ..
-gum spin --spinner dot --title "Cleaning up..." -- rm -rf hyprdots
-gum style --foreground "#49A22C" -- <<< "➤ Cleaned."
+process "Cleaning up..." rm -rf hyprdots
+info "Cleaned."
 
 bash $HOME/.config/scripts/changeTheme.sh -p
 echo -e  "${GREEN}✅ Installation complete!"
