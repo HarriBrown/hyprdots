@@ -88,8 +88,11 @@ I highly recommend using [Chaotic AUR](https://aur.chaotic.cx/docs)
 
 Run this command to install:
 ```
-sudo pacman -Sy --needed curl
-curl -sSL https://raw.githubusercontent.com/BinaryHarbinger/hyprdots/refs/heads/main/install.sh | bash
+sudo pacman -S curl gum
+curl -sSL -o install.sh https://raw.githubusercontent.com/BinaryHarbinger/hyprdots/refs/heads/main/install.sh
+chmod +x install.sh
+./install.sh
+
 
 ```
 
