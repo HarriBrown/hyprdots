@@ -31,7 +31,7 @@ elif firstArgument == "changeWallpaper":
     imageNamePNG = argument+".png"
     imageNameJPG = argument+".jpg"
 
-    scriptPath = "/home/"+os.getlogin()+"/.config/scripts/wallpaper"
+    scriptPath = "/home/"+os.getlogin()+"/.config/hypr/scripts/wallpaper.sh"
 
     if imageNamePNG in image_dict:
         imagePath = path+imageNamePNG

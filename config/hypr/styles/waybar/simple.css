@@ -16,7 +16,7 @@
 * {
 	all: unset; /*Remove the useless GTK theme rules*/
     font-family: "JetBrainsMono Nerd Font","Fira Mono";
-    font-weight: 900;
+    font-weight: 700;
     font-size: 12.5px;
 }
 
@@ -212,7 +212,7 @@ tooltip label {
     background-color: @bg-second;
     font-weight: bold;
     padding: 0px 10px;
-    margin: 2px 5px;
+    margin: 2px 0px;
     border-radius: 10px;
 }
 

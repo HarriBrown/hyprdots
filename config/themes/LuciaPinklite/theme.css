@@ -1,0 +1,25 @@
+@define-color border-main #d3869b;     /* Gruvbox yellow */
+@define-color border-alt #b16286;      /* darker yellow */
+
+@define-color bg-main #fff8dd;         /* Gruvbox dark gray */
+@define-color bg-alt #e0bdc1;          /* lighter gray */
+@define-color bg-hover #d5c4a1;        /* pale beige hover */
+@define-color bg-hover-alt #665c54;    /* muted gray alt hover */
+@define-color bg-tooltip #fff8dd;
+@define-color bg-second #e0bdc1;
+@define-color bg-third #d1c8ac;
+@define-color sway-bg #fff8dd;
+
+@define-color fg-main #d39aaa;         /* main foreground (beige) */
+@define-color fg-unactive #928374;     /* inactive gray */
+@define-color content-act #d3869b;     /* active = yellow */
+
+@define-color ply-main #665c54;        /* muted brown */
+@define-color ply-hover #b16286;       /* hover yellow-brown */
+@define-color ply-act #d3869b;         /* active yellow */
+@define-color msc-act #b8bb26;         /* green accent */
+
+@define-color wlogout-hover rgba(60, 56, 54, 0.54);
+@define-color wlogout-bg rgba(60, 56, 54, 0.45);
+@define-color wlogout-button rgba(60, 56, 54, 0.78);
+

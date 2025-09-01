@@ -1,0 +1,16 @@
+Step by step on creating a new theme:
+-Copy a theme you would like to branch from
+-rename the copy to "test" 
+
+-cd /home/harri/.config/themes
+-python3 colorextractor.py 
+
+-Modify the theme_palette.png in /themes to what you want it to be.
+-Save the edit as "modified.png"
+
+-python3 replacementgen.py
+-./apply_replacements.sh
+
+Done! Rename your new theme to something recogniseable and delete the temporary files:
+modified.png, theme_palette.png, replacements.txt
+

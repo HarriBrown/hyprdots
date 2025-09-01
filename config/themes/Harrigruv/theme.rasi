@@ -1,0 +1,31 @@
+* {
+    border-color:     #fabd2f;
+    selected-normal-foreground: #282828;
+    normal-foreground: #b57614;
+    selected-normal-background: #f2e5bc;
+    normal-background: #fbf1c7;
+    bg-selected:      #f2e5bc;
+    input-bar-bg:     #7c6f64;
+    background-color: #fbf1c7;
+    lightred:         #fb4934;
+    font:             "JetbrainsMono 14";
+    dark:             #1d2021;
+    transparent:      transparent;
+    lightblue:        #83a598;
+    background-alt:   #7c6f64;
+    selected:         #f2e5bc;
+    active:           #b8bb26; /* green */
+    urgent:           #fb4934; /* red */
+    background:       #fbf1c7;
+    foreground:       #b57614;
+    foreground-alt:   #b57614;
+    border-radius:    4px;
+    border-radius-win: 10px;
+    border-selected: var(foreground);
+    location-var:     center;
+    anchor-var:       center;
+    width-var:        500px;
+    list-font:        inherit;
+    lines-var:        10;
+}
+
