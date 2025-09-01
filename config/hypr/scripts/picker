@@ -1,11 +1,10 @@
 #!/bin/bash
 
-COLOR=$(hyprpicker)
+# Hyprpicker çıktısını al, sadece '#' ile başlayan satırı seç ve satır başını kaldır
+COLOR=$(hyprpicker | grep '^#' | tr -d '\n')
 
-if [ $? -eq 0 ] && [ -n "$COLOR" ]; then
-    wl-copy <<< "$COLOR"
+if [ -n "$COLOR" ]; then
+    echo -n "$COLOR" | wl-copy
     notify-send -u normal "🎨 Color Picked" "Copied to clipboard: <b>$COLOR</b>" --icon=applications-graphics
-else
-    notify-send -u critical "❌ Hyprpicker Error" "No color picked or an error occurred." --icon=dialog-error
 fi
 
